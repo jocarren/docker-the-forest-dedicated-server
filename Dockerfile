@@ -3,6 +3,33 @@ FROM ubuntu:18.04
 LABEL maintainer="Sebastian Schmidt"
 
 ENV WINEPREFIX=/wine DEBIAN_FRONTEND=noninteractive PUID=0 PGID=0
+ENV serverIP="0.0.0.0"
+ENV serverSteamPort="8766"
+ENV serverGamePort="27015"
+ENV serverQueryPort="27016"
+ENV serverName="docker-generated"
+ENV serverPlayers="8"
+ENV enableVAC="off"
+ENV serverPassword=""
+ENV serverPasswordAdmin=""
+ENV serverSteamAccount="anonymous"
+ENV serverAutoSaveInterval="30"
+ENV difficulty="Normal"
+ENV initType="Continue"
+ENV slot="1"
+ENV showLogs="off"
+ENV serverContact="email@gmail.com"
+ENV veganMode="off"
+ENV vegetarianMode="off"
+ENV resetHolesMode="off"
+ENV treeRegrowMode="off"
+ENV allowBuildingDestruction="on" 
+ENV allowEnemiesCreativeMode="off"
+ENV allowCheats="off"
+ENV realisticPlayerDamage="off"
+ENV saveFolderPath="/theforest/saves/"
+ENV targetFpsIdle="0"
+ENV targetFpsActive="0"
 
 RUN dpkg --add-architecture i386 \
     && apt-get update \
@@ -30,5 +57,33 @@ RUN apt-get remove -y software-properties-common apt-transport-https cabextract 
 EXPOSE 8766/tcp 8766/udp 27015/tcp 27015/udp 27016/tcp 27016/udp
 
 VOLUME ["/theforest", "/steamcmd"]
+
+RUN echo "serverIP 0.0.0.0 \
+serverSteamPort 8766 \
+serverGamePort 27015 \
+serverQueryPort 27016 \
+serverName jammsen-docker-generated \
+serverPlayers 8 \
+enableVAC off \
+serverPassword \
+serverPasswordAdmin \
+serverSteamAccount \
+serverAutoSaveInterval 30 \
+difficulty Normal \
+initType Continue \
+slot 1 \
+showLogs off \
+serverContact email@gmail.com \
+veganMode off \
+vegetarianMode off \
+resetHolesMode off \
+treeRegrowMode off \
+allowBuildingDestruction on \
+allowEnemiesCreativeMode off \
+allowCheats off \
+realisticPlayerDamage off \
+saveFolderPath \
+targetFpsIdle 0 \
+targetFpsActive 0 \" >> /theforest/config/config.cfg
 
 CMD ["supervisord"]
