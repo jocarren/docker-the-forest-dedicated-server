@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-LABEL maintainer="Sebastian Schmidt"
+MAINTAINER Jonathan Carreño <jocarren@gmail.com>
 
 ENV WINEPREFIX=/wine DEBIAN_FRONTEND=noninteractive PUID=0 PGID=0
 ENV serverIP="0.0.0.0"
